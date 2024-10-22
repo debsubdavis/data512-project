@@ -1,4 +1,4 @@
-raw/filtered_fires_within_60_years_and_650_miles_of_memphis.json
+intermediate/stage0-output/filtered_fire_data.json
 raw/USGS_Wildland_Fire_Combined_Dataset.json
 
 # Byte-compiled / optimized / DLL files
