@@ -1,4 +1,6 @@
+raw/filtered_fires_within_60_years_and_650_miles_of_memphis.json
 raw/USGS_Wildland_Fire_Combined_Dataset.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
