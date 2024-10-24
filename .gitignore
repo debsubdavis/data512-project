@@ -1,5 +1,6 @@
 intermediate/stage0-output/filtered_fire_data.json
 raw/USGS_Wildland_Fire_Combined_Dataset.json
+intermediate/*/*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
