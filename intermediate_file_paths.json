@@ -1,6 +1,7 @@
 {
   "stage0_fire_json": "intermediate/stage0-output/filtered_fire_data.json",
   "stage1_smoke_impact_json": "intermediate/stage1-output/stage1_fire_with_smoke_impact.json",
+  "smoke_impacts_per_year_csv": "intermediate/stage1-output/smoke_impacts_per_year.csv",
   "POC_stage0_fire_json": "intermediate/stage0-output/POC_filtered_fire_data.json",
   "POC_stage1_smoke_impact_json": "intermediate/stage1-output/POC_stage1_fire_with_smoke_impact.json"
 }
