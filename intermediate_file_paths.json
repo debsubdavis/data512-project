@@ -1,7 +1,9 @@
 {
-  "stage0_fire_json": "intermediate/stage0-output/filtered_fire_data.json",
-  "stage1_smoke_impact_json": "intermediate/stage1-output/stage1_fire_with_smoke_impact.json",
-  "smoke_impacts_per_year_csv": "intermediate/stage1-output/smoke_impacts_per_year.csv",
+  "stage0_fire_json": "intermediate/stage0-output/filtered_fire_data_v2.json",
+  "stage0_epa_aqi_csv": "intermediate/stage0-output/epa_aqi.csv",
+  "stage1_si_per_fire_csv": "intermediate/stage1-output/smoke_impacts_per_FIRE.csv",
+  "stage1_si_per_year_csv": "intermediate/stage1-output/smoke_impacts_per_YEAR.csv",
+  "stage1_epa_aqi_per_year_csv": "intermediate/stage1-output/epa_AQI_per_YEAR.csv",
   "POC_stage0_fire_json": "intermediate/stage0-output/POC_filtered_fire_data.json",
   "POC_stage1_smoke_impact_json": "intermediate/stage1-output/POC_stage1_fire_with_smoke_impact.json"
 }
