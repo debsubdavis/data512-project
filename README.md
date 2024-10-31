@@ -92,9 +92,11 @@ For the purposes of this project the following variables are relevant:
 
 Processes fire data to estimate the smoke impact on Memphis based on fire size, distance, and estimated duration. It first loads fire attributes, checks for data consistency, and calculates a “smoke impact” score for each fire by normalizing fire size and distance factors. Smoke impacts are then amortized over each fire’s estimated duration, and cumulative yearly smoke impacts are computed and saved for further analysis.
 
+For more specific information about the smoke impact calculation, please reference the stage1_fire_processing notebook file linked below.
+
 ### _Notebook file:_ [Stage 1 - Fire Data Processing](stage1_fire_processing.ipynb)
 
-### _Inputs:_ [Filtered Fire Data JSON](<(https://drive.google.com/drive/folders/18XVSqhz8zUvdYDgk6LWIDjq-bf18rqgZ?usp=drive_link)>)
+### _Inputs:_ [Filtered Fire Data JSON](<https://drive.google.com/file/d/1DtCaovDwGylEoWULV8GdJHHAmsSFXfDr/view?usp=drive_link)
 
 Schema for Filtered Fire Data JSON is the same as outlined above
 
@@ -201,7 +203,7 @@ Analyzes wildfire and air quality data to assess the impact of wildfires on air 
 - [si_per_FIRE](intermediate/stage1-output/smoke_impacts_per_FIRE.csv)
 - [si_per_YEAR](intermediate/stage1-output/smoke_impacts_per_YEAR.csv)
 - [epa_AQI_per_YEAR](intermediate/stage1-output/epa_AQI_per_YEAR.csv)
-- [Filtered Fire Data JSON](<(https://drive.google.com/drive/folders/18XVSqhz8zUvdYDgk6LWIDjq-bf18rqgZ?usp=drive_link)>)
+- [Filtered Fire Data JSON](https://drive.google.com/file/d/1DtCaovDwGylEoWULV8GdJHHAmsSFXfDr/view?usp=drive_link)
 
 All schemas described above
 
@@ -245,14 +247,23 @@ Model file saved in Google Drive folder to keep repo size from becoming too infl
 
 #### normalize_and_weight_features schema
 
+| Variable                 | Data Type | Description                                                                                       |
+| ------------------------ | --------- | ------------------------------------------------------------------------------------------------- |
+| `acres_weight`           | `integer` | Weight assigned to the total acres burned, used to normalize the impact of fire size.             |
+| `dist_weight`            | `integer` | Weight assigned to the distance from Memphis, used to normalize the impact of distance.           |
+| `max_total_acres_burned` | `float`   | Maximum total acres burned in the dataset, used as a normalization factor for future predictions. |
+
 # Stage 4: Model Predictions
 
-#### _Description_
+### _Description_
 
 Generates future predictions for wildfire size, distance from Memphis, and associated smoke impact from 2025 to 2050. It calculates 5-year rolling averages of historical data to predict future fire trends, then normalizes and weights these predictions before applying a trained Gradient Boosting model to estimate smoke impact. Finally, the predicted smoke impact is visualized over time to analyze potential trends through 2050.
 
-#### _Notebook file:_ [Stage 4 - Model Predictions](stage4_model_predictions.ipynb)
+### _Notebook file:_ [Stage 4 - Model Predictions](stage4_model_predictions.ipynb)
 
-#### _Inputs_
+### _Inputs_
 
-#### _Outputs_
+- [normalize_and_weight_features](intermediate/stage2-output/normalize_and_weight_features.csv)
+- [best_model_file](https://drive.google.com/file/d/1hLMsotlUFZAgxQNI9mniyg5IJ3m-PBxO/view?usp=drive_link)
+
+Schemas described above
