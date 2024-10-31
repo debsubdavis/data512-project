@@ -4,6 +4,12 @@
 
 This project involves creating a smoke impact estimate for an assigned U.S. city based on wildfire data from the past 60 years. Using this estimate, comparisons are drawn against EPA AQI data, and a predictive model is developed to forecast smoke impacts through 2050. The analysis aims to support civic institutions in making informed decisions on wildfire impact mitigation
 
+# Part 1 PDF
+
+The PDF required for the reflection and visualization extended captions is saved here:
+
+[Part 1 Writeup PDF](part1_reflection/Data512_Part_1_Writeup.pdf)
+
 # Development Environment Setup
 
 Please use the **[environment.yml](dev_env_setup/environment.yml)** and/or the **[requirements.txt](dev_env_setup/requirements.txt)** file to set up the development environment on your local machine.
@@ -40,7 +46,7 @@ Note: The the fire polygon data only (reliably) provides a year for each fire - 
 
 ### _Notebook File:_ [_Stage 0 - Fire Data Acquisition_](stage0_fire_acquisition.ipynb)
 
-### _Outputs_: [Filtered Fire Data JSON](<(https://drive.google.com/drive/folders/18XVSqhz8zUvdYDgk6LWIDjq-bf18rqgZ?usp=drive_link)>)
+### _Outputs_: [Filtered Fire Data JSON](https://drive.google.com/drive/folders/18XVSqhz8zUvdYDgk6LWIDjq-bf18rqgZ?usp=drive_link)
 
 Since the file is so large, a version of this data is saved in the Google Drive folder linked above, instead of included in this repository. Please note this file has restricted access.
 
@@ -96,7 +102,7 @@ For more specific information about the smoke impact calculation, please referen
 
 ### _Notebook file:_ [Stage 1 - Fire Data Processing](stage1_fire_processing.ipynb)
 
-### _Inputs:_ [Filtered Fire Data JSON](<https://drive.google.com/file/d/1DtCaovDwGylEoWULV8GdJHHAmsSFXfDr/view?usp=drive_link)
+### _Inputs:_ [Filtered Fire Data JSON](https://drive.google.com/file/d/1DtCaovDwGylEoWULV8GdJHHAmsSFXfDr/view?usp=drive_link)
 
 Schema for Filtered Fire Data JSON is the same as outlined above
 
