@@ -8,6 +8,7 @@
   "stage2_scaled_si_per_year_csv": "intermediate/stage2-output/SCALED_smoke_impacts_per_YEAR.csv",
   "normalize_and_weight_features.csv": "intermediate/stage2-output/normalize_and_weight_features.csv",
   "model_output": "model-files/best_gradient_boosting_model.pkl",
+  "smoke_impact_model_predictions.csv": "final-output/smoke_impact_estimate_mdl_future_prediction.csv",
   "POC_stage0_fire_json": "intermediate/stage0-output/POC_filtered_fire_data.json",
   "POC_stage1_smoke_impact_json": "intermediate/stage1-output/POC_stage1_fire_with_smoke_impact.json"
 }

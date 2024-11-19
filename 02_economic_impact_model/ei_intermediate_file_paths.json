@@ -1,0 +1,4 @@
+{
+  "smoke_impact_model_predictions.csv": "../01_smoke_impact_estimate_model/final-output/smoke_impact_estimate_mdl_future_prediction.csv",
+  "ei_model_output": "model-files/best_ei_model.pkl"
+}
