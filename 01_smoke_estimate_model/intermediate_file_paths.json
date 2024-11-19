@@ -1,0 +1,13 @@
+{
+  "stage0_fire_json": "intermediate/stage0-output/filtered_fire_data_v2.json",
+  "stage0_epa_aqi_csv": "intermediate/stage0-output/epa_aqi.csv",
+  "stage1_si_per_fire_csv": "intermediate/stage1-output/smoke_impacts_per_FIRE.csv",
+  "stage1_si_per_year_csv": "intermediate/stage1-output/smoke_impacts_per_YEAR.csv",
+  "stage1_epa_aqi_per_day_csv": "intermediate/stage1-output/epa_AQI_per_DAY.csv",
+  "stage1_epa_aqi_per_year_csv": "intermediate/stage1-output/epa_AQI_per_YEAR.csv",
+  "stage2_scaled_si_per_year_csv": "intermediate/stage2-output/SCALED_smoke_impacts_per_YEAR.csv",
+  "normalize_and_weight_features.csv": "intermediate/stage2-output/normalize_and_weight_features.csv",
+  "model_output": "model-files/best_gradient_boosting_model.pkl",
+  "POC_stage0_fire_json": "intermediate/stage0-output/POC_filtered_fire_data.json",
+  "POC_stage1_smoke_impact_json": "intermediate/stage1-output/POC_stage1_fire_with_smoke_impact.json"
+}

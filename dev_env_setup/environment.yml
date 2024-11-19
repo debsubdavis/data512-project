@@ -1,8 +1,0 @@
-name: 512_proj # Name of the conda environment
-channels:
-  - defaults # Channels to search for packages
-dependencies:
-  - python=3.11
-  - pip
-  - pip:
-      - -r requirements.txt
