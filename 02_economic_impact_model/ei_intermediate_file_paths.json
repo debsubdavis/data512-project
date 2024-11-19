@@ -1,4 +1,8 @@
 {
   "smoke_impact_model_predictions.csv": "../01_smoke_impact_estimate_model/final-output/smoke_impact_estimate_mdl_future_prediction.csv",
+  "raw_laus.csv": "raw/LAUS_Memphis_TN Metropolitan_Statistical_Area.xlsx",
+  "raw_sae.csv": "raw/SAE_Memphis.xlsx",
+  "raw_noaa.csv": "raw/NOAA_Weather_Memphis_Airport.csv",
+  "stage1_bls_output.csv": "intermediate/stage1-output/stage1_bls_output.csv",
   "ei_model_output": "model-files/best_ei_model.pkl"
 }
