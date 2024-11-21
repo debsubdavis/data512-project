@@ -1,8 +1,8 @@
 *config.json
-intermediate/stage0-output/filtered_fire_data.json
-raw/USGS_Wildland_Fire_Combined_Dataset.json
-intermediate/*/*.json
-*model-files/*.pkl
+*/intermediate/stage0-output/filtered_fire_data.json
+*/raw/USGS_Wildland_Fire_Combined_Dataset.json
+*/intermediate/*/*.json
+*/model-files/*.pkl
 *.pkl
 
 
