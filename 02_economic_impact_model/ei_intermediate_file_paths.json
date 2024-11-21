@@ -7,5 +7,6 @@
   "stage1_bls_output.csv": "intermediate/stage1-output/stage1_bls_output.csv",
   "stage1_noaa_output.csv": "intermediate/stage1-output/stage1_noaa_output.csv",
   "stage2_fs_merged_output.csv": "intermediate/stage2-output/stage2_fs_merged_output.csv",
+  "economic_impact_model_predictions.csv": "final-output/economic_impact_estimate_mdl_future_prediction.csv",
   "ei_model_output": "model-files/best_ei_model.pkl"
 }
