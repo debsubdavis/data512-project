@@ -9,3 +9,4 @@ pyproj==3.7
 scikit-learn==1.5.2
 openpyxl==3.1.5
 statsmodels==0.14.4
+folium==0.18.0
