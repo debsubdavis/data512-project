@@ -56,7 +56,7 @@ Here are the steps that were taken to obtain the NOAA Global Summary of the Mont
 
 ### _Description:_
 
-NEED TO UPDATE!
+Process U.S. Bureau of Labor Statistics datasets, specifically the Local Area Unemployment Statistics (LAUS) and the State and Metro Area Employment, Hours, & Earnings (SAE) data. It cleans and reshapes these datasets, merges them based on the date, and calculates the year-over-year percentage differences for key economic metrics. The final output is a merged dataset saved to a CSV file for further analysis.
 
 ### _Notebook file:_ [Stage 1 - BLS Data Processing](stage1_bls_processing.ipynb)
 
@@ -120,7 +120,7 @@ NEED TO UPDATE!
 
 ### _Description:_
 
-NEED TO UPDATE!
+Processes NOAA weather data for Memphis International Airport from 2009 to 2024. It performs data quality checks, including identifying missing months and duplicates, then filters the dataset to retain only the required columns: average temperature, maximum and minimum temperatures, and total precipitation. The cleaned dataset is then saved as a CSV file for further analysis.
 
 ### _Notebook file:_ [Stage 1 - NOAA Data Processing](stage1_noaa_processing.ipynb)
 
@@ -132,7 +132,7 @@ NEED TO UPDATE!
 
 ### NOAA Weather Memphis Airport (Raw Data) Schema
 
-Note: Used chatGPT 4o model to help me generate the table below
+Note: Used chatGPT 4o model to generate the table below
 
 | Column Name | Data Type | Description                                                               |
 | ----------- | --------- | ------------------------------------------------------------------------- |
@@ -186,76 +186,94 @@ Note: Used chatGPT 4o model to help me generate the table below
 
 ### _Description_
 
-Analyzes wildfire and air quality data to assess the impact of wildfires on air quality in Memphis. It processes distance data, fire statistics, and smoke impact estimates, filtering data for the fire season (May to October) and calculating annual averages. The script then visualizes the results through various plots, comparing scaled smoke impact estimates with AQI measurements over time and saving the output for further analysis.
+Merges NOAA weather data and BLS labor statistics for Memphis, then filters and processes the combined dataset to focus on fire season months (May to October). It analyzes the relationship between wildfire smoke exposure, weather variables, and labor market metrics, generating visualizations to explore year-over-year changes in key features. The final dataset is saved for use in model training.
 
-### _Notebook file:_ [Stage 2 - Combined Analysis](stage2_combined_analysis.ipynb)
+### _Notebook file:_ [Stage 2 - Analysis](stage2_analysis.ipynb)
 
 ### _Inputs_
 
-- [si_per_FIRE](intermediate/stage1-output/smoke_impacts_per_FIRE.csv)
-- [si_per_YEAR](intermediate/stage1-output/smoke_impacts_per_YEAR.csv)
-- [epa_AQI_per_YEAR](intermediate/stage1-output/epa_AQI_per_YEAR.csv)
-- [Filtered Fire Data JSON](https://drive.google.com/file/d/1DtCaovDwGylEoWULV8GdJHHAmsSFXfDr/view?usp=drive_link)
+- [Stage 1 NOAA Output](intermediate/stage1-output/stage1_noaa_output.csv)
+- [Stage 1 BLS Output](intermediate/stage1-output/stage1_bls_output.csv)
 
-All schemas described above
+Schemas described above
 
 ### _Outputs_
 
-- [SCALED_smoke_impacts_per_YEAR](intermediate/stage2-output/SCALED_smoke_impacts_per_YEAR.csv)
+- [Fire Season NOAA BLS Merged Output](intermediate/stage2-output/stage2_fs_merged_output.csv)
 
-#### SCALED_smoke_impacts_per_YEAR schema
+**Schema for Stage 2 Fire Season Merged Output csv file**
 
-| Variable                        | Data Type | Description                                                                                   |
-| ------------------------------- | --------- | --------------------------------------------------------------------------------------------- |
-| `year`                          | `integer` | Calendar year for the record, covering the range of analysis years.                           |
-| `fire_year`                     | `float`   | Year when the fire occurred (matches `year` unless data is filled in based on other sources). |
-| `total_amortized_smoke_impact`  | `float`   | Sum of smoke impacts amortized over fire durations for all fires in the given year.           |
-| `total_fire_duration`           | `float`   | Cumulative fire duration across all fires in the year, measured in days.                      |
-| `total_acres_burned`            | `float`   | Total acres burned by wildfires in the year.                                                  |
-| `avg_daily_smoke_impact`        | `float`   | Average daily smoke impact from wildfires, calculated across all days in the year.            |
-| `scaled_avg_daily_smoke_impact` | `float`   | Scaled average daily smoke impact, adjusted to a align with air quality index comparisons.    |
+Note: Used chatGPT 4o model to generate the table below
+
+| Column Name                         | Data Type | Description                                                                               |
+| ----------------------------------- | --------- | ----------------------------------------------------------------------------------------- |
+| date                                | str       | The date of the analysis entry, formatted as YYYY-MM-DD.                                  |
+| bls_date                            | str       | The date of the BLS data entry, formatted as YYYY-MM-DD.                                  |
+| bls_curr_sae_hrs                    | float     | Current average weekly hours worked from the SAE dataset for the given month and year.    |
+| bls_curr_laus_labor_force           | float     | Current labor force value from the LAUS dataset for the given month and year.             |
+| bls_curr_laus_unemployment_rate     | float     | Current unemployment rate (%) from the LAUS dataset for the given month and year.         |
+| bls_prev_yr_sae_hrs                 | float     | Average weekly hours worked from the SAE dataset for the same month in the previous year. |
+| bls_prev_yr_laus_labor_force        | float     | Labor force value from the LAUS dataset for the same month in the previous year.          |
+| bls_prev_yr_laus_unemployment_rate  | float     | Unemployment rate (%) from the LAUS dataset for the same month in the previous year.      |
+| bls_pct_diff_sae_hrs                | float     | Percentage difference in average weekly hours worked compared to the previous year.       |
+| bls_pct_diff_laus_labor_force       | float     | Percentage difference in the labor force compared to the previous year.                   |
+| bls_pct_diff_laus_unemployment_rate | float     | Percentage difference in the unemployment rate compared to the previous year.             |
+| noaa_name                           | str       | Name of the weather station (e.g., MEMPHIS INTERNATIONAL AIRPORT, TN US).                 |
+| noaa_date                           | str       | The date of the NOAA data entry, formatted as YYYY-MM-DD.                                 |
+| noaa_tavg                           | float     | Average temperature (°F) for the given month and year.                                    |
+| noaa_tmax                           | float     | Maximum temperature (°F) for the given month and year.                                    |
+| noaa_tmin                           | float     | Minimum temperature (°F) for the given month and year.                                    |
+| noaa_prcp                           | float     | Total monthly precipitation (inches) for the given month and year.                        |
 
 # Stage 3: Model Training
 
 ### _Description_
 
-Trains a model to predict the impact of wildfire smoke using a Gradient Boosting Regressor with optimized hyperparameters. It preprocesses and normalizes wildfire data, removes outliers, and applies bootstrapping with cross-validation to identify the model with the best performance. The final model is saved for future use, and residuals are plotted to visualize the model's accuracy in predicting smoke impact.
+Merges historical smoke impact data with NOAA weather and BLS labor statistics for Memphis, processes the merged dataset (including filtering to only 2009 - 2020), and trains a gradient-boosted decision tree model to predict unemployment rates. It utilizes grid search and bootstrapping to find the optimal model parameters, assesses the model's stability, and generates visualizations of the model performance. The trained model is then saved for future use.
 
 ### _Notebook file:_ [Stage 3 - Model Training](stage3_model_training.ipynb)
 
 ### _Inputs_
 
-- [si_per_FIRE](intermediate/stage1-output/smoke_impacts_per_FIRE.csv)
-- [SCALED_smoke_impacts_per_YEAR](intermediate/stage2-output/SCALED_smoke_impacts_per_YEAR.csv)
+- [Historical Scaled Smoke Impacts per Year (from Smoke Impact Model)](../01_smoke_impact_estimate_model/intermediate/stage2-output/SCALED_smoke_impacts_per_YEAR.csv)
+- [Fire Season NOAA BLS Merged Output](intermediate/stage2-output/stage2_fs_merged_output.csv)
 
-Schemas described above
+Schema for Historical Scaled Smoke Impacts per year listed [here](../01_smoke_impact_estimate_model/Smoke_Impact_Model_README.md)
+
+Schema for Fire Season NOAA BLS Merged Ouput listed above
 
 ### _Outputs_
 
-- [normalize_and_weight_features](intermediate/stage2-output/normalize_and_weight_features.csv)
-- [best_model_file](https://drive.google.com/file/d/1hLMsotlUFZAgxQNI9mniyg5IJ3m-PBxO/view?usp=drive_link)
+- [best_model_file](https://drive.google.com/file/d/1QNy8mrerP-FejbSEDNvddVChz8RBjqo9/view?usp=drive_link)
 
 Model file saved in Google Drive folder to keep repo size from becoming too inflated
-
-#### normalize_and_weight_features schema
-
-| Variable                 | Data Type | Description                                                                                       |
-| ------------------------ | --------- | ------------------------------------------------------------------------------------------------- |
-| `acres_weight`           | `integer` | Weight assigned to the total acres burned, used to normalize the impact of fire size.             |
-| `dist_weight`            | `integer` | Weight assigned to the distance from Memphis, used to normalize the impact of distance.           |
-| `max_total_acres_burned` | `float`   | Maximum total acres burned in the dataset, used as a normalization factor for future predictions. |
 
 # Stage 4: Model Predictions
 
 ### _Description_
 
-Generates future predictions for wildfire size, distance from Memphis, and associated smoke impact from 2025 to 2050. It calculates 5-year rolling averages of historical data to predict future fire trends, then normalizes and weights these predictions before applying a trained Gradient Boosting model to estimate smoke impact. Finally, the predicted smoke impact is visualized over time to analyze potential trends through 2050.
+Generates predictions for economic impact in Memphis, using the trained model from Stage 3. It utilizes 5-year rolling averages to project future weather and labor force metrics, merges these with predicted smoke impact data (from the Smoke Impact Model), and forecasts the year-over-year change in unemployment rate for 2025-2050. The results are visualized in multiple plots and saved as an output csv file.
 
 ### _Notebook file:_ [Stage 4 - Model Predictions](stage4_model_predictions.ipynb)
 
 ### _Inputs_
 
-- [normalize_and_weight_features](intermediate/stage2-output/normalize_and_weight_features.csv)
-- [best_model_file](https://drive.google.com/file/d/1hLMsotlUFZAgxQNI9mniyg5IJ3m-PBxO/view?usp=drive_link)
+- [best_model_file](https://drive.google.com/file/d/1QNy8mrerP-FejbSEDNvddVChz8RBjqo9/view?usp=drive_link)
 
-Schemas described above
+### _Outputs_
+
+- [Economic Impact Model Predictions](final-output/economic_impact_estimate_mdl_future_prediction.csv)
+
+**Schema for Economic Impact Model Predictions csv file**
+
+Note: Used chatGPT 4o model to generate the table below
+
+| Column Name                     | Data Type | Description                                                                                                   |
+| ------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------- |
+| year                            | int       | The year for which the prediction is made.                                                                    |
+| noaa_tavg                       | float     | Predicted average temperature (°F) for the given year, based on 5-year rolling averages.                      |
+| noaa_prcp                       | float     | Predicted total monthly precipitation (inches) for the given year, based on 5-year rolling averages.          |
+| bls_pct_diff_sae_hrs            | float     | Predicted percentage difference in average weekly hours worked, based on 5-year rolling averages.             |
+| bls_pct_diff_laus_labor_force   | float     | Predicted percentage difference in the labor force, based on 5-year rolling averages.                         |
+| scaled_avg_daily_smoke_impact   | float     | Scaled average daily smoke impact score for the given year, based on predictions from the Smoke Impact Model. |
+| pct_diff_laus_unemployment_rate | float     | Predicted percentage difference in the unemployment rate for the given year.                                  |
